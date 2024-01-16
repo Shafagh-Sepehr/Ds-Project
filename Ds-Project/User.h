@@ -15,4 +15,6 @@ public:
 	User(sting name, string lname, string username, string pass, int code);
 	void addBook(Book* book);
 	Book* returnBook();
+	void setOwner(User* u1, Book* b1);
+
 };

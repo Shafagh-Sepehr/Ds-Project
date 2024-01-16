@@ -22,3 +22,15 @@ Book* User::returnBook() {
 	cout << "\nno book in list\n";
 	return nullptr;
 }
+
+void User::setOwner(User* u1, Book* b1) {
+	try {
+		if (this->admin)
+			b1->setBookOwner(u1);
+		else
+			cout << "\nyou are not admin\n";
+	}
+	catch (string cmd) {
+		cout << endl << cmd << endl;
+	}
+}
