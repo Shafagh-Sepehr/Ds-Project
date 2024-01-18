@@ -1,5 +1,6 @@
-#include <iostream>
+#include "Book.h"
 using namespace std;
+
 int main() {
-	cout << "dorost shod";
+	Book b1("a", "a", "a", "a");
 }
