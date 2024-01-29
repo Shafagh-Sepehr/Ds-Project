@@ -11,6 +11,7 @@ private:
 	int size;
 	int items_in_queue;
 public:
+	Queue() = default;
 	Queue(const Queue<T>& queue);
 	Queue(int size);
 	T Dequeue();
