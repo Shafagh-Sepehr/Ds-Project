@@ -21,9 +21,27 @@
     <ClCompile Include="List.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Book.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Queue.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="User.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="List.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Book.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Queue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="User.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

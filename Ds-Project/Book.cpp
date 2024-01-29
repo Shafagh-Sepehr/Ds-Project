@@ -13,3 +13,10 @@ void Book::setBookOwner(int id) {
 	else
 		throw "this book is owned";
 }
+
+void Book::printBook() {
+	cout << endl << "book name: " << this->name
+		<< endl << "book genre: " << this->genre
+		<< endl << "book writer: " << this->writer
+		<< endl << "owner: " << ((this->owner) ? this->owner : -1);
+}

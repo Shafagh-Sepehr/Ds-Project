@@ -27,7 +27,8 @@ void Node<T>::add_after(T data) {
 template<typename T>
 void Node<T>::add_before(T data) {
 
-	Node<T> *new_node = new Node<T>(data);
+	Node<T> *new_node = new Node<T>;
+	new_node->data = data;
 	Node<T> *after = this;
 	Node<T> *before = this->prev;
 

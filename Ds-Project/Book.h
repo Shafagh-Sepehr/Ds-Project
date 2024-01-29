@@ -12,6 +12,7 @@ private:
 public:
 	Book(string genre, string name, string date, string writer);
 	void setBookOwner(int id);
+	void printBook();
 };
 
 #endif // !BOOK_H
