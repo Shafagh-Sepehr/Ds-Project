@@ -16,17 +16,22 @@ void User::addBook(Book* book) {
 	this->book_list.push_back(book);
 }
 
-Book* User::returnBook() {
-	if(!this->book_list.empty())
-		return book_list.pop_back();
-	cout << "\nno book in list\n";
-	return nullptr;
+void User::returnBook(Book* b1) {
+	for (int i = 0; i < this->book_list.size(); i++)
+		if (this->book_list[i] == b1) {
+			this->book_list.erase(i);
+			b1->unown();
+			return;
+		}
 }
 
 void User::setOwner(User* u1,Book* b1) {
 	try {
 		if (this->admin) {
-			b1->setBookOwner(u1->code);
+			if (b1->setBookOwner(u1->code)) {
+				cout << "\nthis book is owned\n";
+				return;
+			}
 			u1->addBook(b1);
 			cout << "\nsetting owner completed\n";
 		}
@@ -38,10 +43,8 @@ void User::setOwner(User* u1,Book* b1) {
 	}
 }
 
-List<Book*> User::getList() {
-	return this->book_list;
-}
-
 void User::printList() {
-	
+	cout << "\nUser " << this->name << " books:";
+	for (int i = 0; i < this->book_list.size(); i++)
+		this->book_list[i]->printBook();
 }

@@ -11,8 +11,10 @@ private:
 	int owner;
 public:
 	Book(string genre, string name, string date, string writer);
-	void setBookOwner(int id);
+	int setBookOwner(int id);
 	void printBook();
+	bool operator==(Book* b1);
+	void unown();
 };
 
 #endif // !BOOK_H

@@ -14,8 +14,7 @@ private:
 public:
 	User(string name, string lname, string username, string pass, int code);
 	void addBook(Book* book);
-	Book* returnBook();
+	void returnBook(Book* b1);
 	void setOwner(User* u1,Book* b1);
-	List<Book*> getList();
 	void printList();
 };

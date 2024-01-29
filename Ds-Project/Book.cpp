@@ -7,16 +7,28 @@ Book::Book(string genre, string name, string date, string writer) {
 	this->writer = writer;
 	this->owner = 0;
 }
-void Book::setBookOwner(int id) {
-	if (!this->owner)
+int Book::setBookOwner(int id) {
+	if (!this->owner) {
 		this->owner = id;
-	else
-		throw "this book is owned";
+		return 0;
+	}
+	return 1;
 }
 
 void Book::printBook() {
-	cout << endl << "book name: " << this->name
+	cout << "\n-----------------------------"
+		<<endl << "book name: " << this->name
 		<< endl << "book genre: " << this->genre
 		<< endl << "book writer: " << this->writer
-		<< endl << "owner: " << ((this->owner) ? this->owner : -1);
+		<< endl << "owner: " << ((this->owner) ? this->owner : -1)
+		<< "\n-----------------------------";
+}
+
+bool Book::operator==(Book* b1) {
+	return this->name == b1->name && this->genre == b1->genre
+		&& this->owner == b1->owner && this->writer == b1->writer;
+}
+
+void Book::unown() {
+	this->owner = 0;
 }
