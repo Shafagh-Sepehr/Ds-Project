@@ -1,5 +1,7 @@
-#include "User.h"
-#include "Book.h"
+//#include "User.h"
+//#include "Book.h"
+#include "AvlTree.h"
+#include "AvlTree.cpp"
 using namespace std;
 // Add kardan queue va handle kardanesh
 
@@ -25,8 +27,21 @@ int main() {
 	u3.printList();
 	b1.printBook();*/
 
-
-
+	//this checks rr,ll,rl,lr rebalance
+	AvlTree<int, string> tree;
+	tree.insert(make_pair(100, "book1"));
+	tree.insert(make_pair(200, "book1"));
+	tree.insert(make_pair(300, "book1"));
+	tree.insert(make_pair(50, "book1"));
+	tree.insert(make_pair(25, "book1"));
+	tree.insert(make_pair(250, "book1"));
+	tree.insert(make_pair(350, "book1"));
+	tree.insert(make_pair(101, "book1"));
+	tree.insert(make_pair(99, "book1"));
+	tree.insert(make_pair(98, "book1"));
+	tree.insert(make_pair(275, "book1"));
+	tree.insert(make_pair(225, "book1"));
+	tree.insert(make_pair(280, "book1"));
 
 
 }

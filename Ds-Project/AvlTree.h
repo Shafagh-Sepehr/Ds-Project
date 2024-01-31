@@ -1,35 +1,69 @@
 #pragma once
 #include <iostream>
+//#include "List.h"
+//#include "List.cpp"
 using namespace std;
 
-class TreeNode {
+template <typename K, typename D>
+class TreeNode;
+
+template <typename K, typename D>
+class AvlTree {
 private:
-	long data;
-	TreeNode *parent;
-	TreeNode *left;
-	TreeNode *right;
+	TreeNode<K, D> *root;
+	int _size;
+
+	int node_height(TreeNode<K, D> *node) const;
+
+	void check_balance( TreeNode<K, D> *node);
+	bool is_node_balanced(const TreeNode<K, D> *node) const;
+	TreeNode<K, D> *rebalance_node(TreeNode<K, D> *node);
+
+	bool is_right_higher(const TreeNode<K, D> *node) const;
+
+	TreeNode<K, D> *rebalance_rr(TreeNode<K, D> *upper_node, TreeNode<K, D> *middle_node);
+	TreeNode<K, D> *rebalance_ll(TreeNode<K, D> *upper_node, TreeNode<K, D> *middle_node);
+	TreeNode<K, D> *rebalance_rl(TreeNode<K, D> *upper_node, TreeNode<K, D> *middle_node, TreeNode<K, D> *lower_node);
+	TreeNode<K, D> *rebalance_lr(TreeNode<K, D> *upper_node, TreeNode<K, D> *middle_node, TreeNode<K, D> *lower_node);
+
+public:
+	AvlTree();
+
+	int size() const;
+	bool empty() const;
+	void insert(pair<K, D> data);
+	//long find(K key);
+	//void remove(K key);
+
+
+
+
+
+
+
+
+};
+
+template <typename K, typename D>
+class TreeNode {
+	friend AvlTree<K, D>;
+
+
+private:
+	pair<K, D> data;
+	TreeNode<K, D> *parent;
+	TreeNode<K, D> *left;
+	TreeNode<K, D> *right;
 
 public:
 	TreeNode();
+	TreeNode(pair<K, D> data);
+	TreeNode(const TreeNode &that);
 	bool is_root() const;
 	bool is_external() const;
 	int height() const;
-	void add_to_right(TreeNode *new_node);
-	void add_to_left(TreeNode *new_node);
+	TreeNode<K, D> *extend(pair<K, D> data);
+	//void add_to_right(TreeNode *new_node);
+	//void add_to_left(TreeNode *new_node);
 
 };
-
-
-class AvlTree {
-
-
-
-
-
-
-
-
-
-
-};
-

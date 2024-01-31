@@ -1,5 +1,5 @@
+#pragma once
 #include "List.h"
-
 
 template<typename T>
 Node<T>::Node():data(T()), prev(nullptr), next(nullptr) {}
