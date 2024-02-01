@@ -51,7 +51,7 @@ int main() {
 			error = false;
 			system("CLS");
 			cout << "1. add book (admin)\n2. show my books\n3. search my books\n4. show all books\n"
-				<< "5. search all books\n6. borrow book (admin)\n7. return book (admin)\n8. extend borrow (admin)\n9. logout";
+				<< "5. search all books\n6. borrow book (admin)\n7. return book (admin)\n8. extend borrow (admin)\n9. logout\n";
 			cin >> command;
 			system("CLS");
 			switch (command)
