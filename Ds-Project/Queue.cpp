@@ -39,6 +39,11 @@ T Queue<T>::Dequeue() {
 	return tmp;
 }
 
+template<typename T>
+T Queue<T>::last() {
+	return this->arr[this->rear];
+}
+
 template <typename T>
 int Queue<T>::GetItemsInQueue() {
 	return this->items_in_queue;

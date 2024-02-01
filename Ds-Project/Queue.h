@@ -15,6 +15,7 @@ public:
 	Queue(const Queue<T>& queue);
 	Queue(int size);
 	T Dequeue();
+	T last();
 	void queue(T data);
 	int GetItemsInQueue();
 	int GetSize();
