@@ -18,6 +18,9 @@ Book *Controller::search_book(string name) {
 
 	AvlTree<string, Book *> book_tree;
 
+	if (Book::get_books_list().empty())
+		return nullptr;
+
 	for ( auto book_node : Book::get_books_list() ) {
 		book_tree.insert(make_pair(book_node->get_data()->get_name(), book_node->get_data()));
 	}
@@ -39,6 +42,9 @@ Book *Controller::search_book(string name) {
 Book *Controller::search_user_borrowed_book(string name) {
 	AvlTree<string, Book *> book_tree;
 
+	if (logged_in_user->get_book_list().empty())
+		return nullptr;
+
 	for ( auto book_node : logged_in_user->get_book_list() ) {
 		book_tree.insert(make_pair(book_node->get_data()->book->get_name(), book_node->get_data()->book));
 	}
@@ -57,7 +63,7 @@ Book *Controller::search_user_borrowed_book(string name) {
 	return book;
 }
 
-void Controller::borrow_book(Book *book, User *user) {
+
 User* Controller::getUser(string username, string pass) {
 	for (int i = 0; i < logged_in_user->get_users_list().size(); i++)
 		if (logged_in_user->get_users_list()[i]->checkLogin(username, pass))
@@ -129,7 +135,6 @@ List<pair<string, Book>> Controller::show_user_borrowed_books() {
 }
 
 List<pair<string, Book>> Controller::show_all_books() {
-
 
 	AvlTree<string, Book> book_tree;
 	for ( auto i : Book::get_books_list() ) {
