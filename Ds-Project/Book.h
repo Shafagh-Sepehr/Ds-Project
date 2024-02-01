@@ -1,4 +1,5 @@
 #pragma once
+#pragma warning(disable:4996)
 #include "Queue.h"
 #include "Queue.cpp"
 #include "List.h"
