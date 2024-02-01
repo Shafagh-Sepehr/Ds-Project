@@ -269,3 +269,5 @@ TreeNode<K, D> *AvlTree<K, D>::rebalance_lr(TreeNode<K, D> *upper_node, TreeNode
 
 	return lower_node;
 }
+
+

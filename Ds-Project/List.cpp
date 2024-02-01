@@ -337,7 +337,7 @@ List<T>::Iterator::Iterator(const List<T>::Iterator &that) = default;
 
 
 template<typename T>
-typename List<T>::Iterator List<T>::Iterator::operator=(Node<T> node) {
+typename List<T>::Iterator List<T>::Iterator::operator=(Node<T> *node) {
 	this->ptr = node;
 	return *this;
 }

@@ -21,7 +21,7 @@ public:
 		Iterator(const List<T>::Iterator &that);
 
 
-		List<T>::Iterator operator=(Node<T> node);
+		List<T>::Iterator operator=(Node<T> *node);
 		List<T>::Iterator operator++();
 		List<T>::Iterator operator--();
 		List<T>::Iterator operator++(int);
