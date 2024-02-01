@@ -22,9 +22,10 @@ public:
 	static void add_user(string name, string lname, string username, string pass);
 	static void add_book(string genre, string name, string date, string writer);
 	static Book *search_book(string name);
-	static void borrow_book(Book *book, User* user);
+	static void borrow_book(Book *book, User *user);
 	static void return_book(element book);
-
+	static void show_user_borrowed_books();
+	static void show_all_books();
 
 
 

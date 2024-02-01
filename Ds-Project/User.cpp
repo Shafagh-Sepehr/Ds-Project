@@ -29,9 +29,9 @@ void User::addBook(Book *b1) {
 	this->book_list.push_back(tmp);
 }
 
-void User::returnBook(element b1) {
+void User::returnBook(element *b1) {
 	for ( int i = 0; i < this->book_list.size(); i++ )
-		if ( this->book_list[i].book == b1.book ) {
+		if ( this->book_list[i]->book == b1->book ) {
 			this->book_list.erase(i);
 			return;
 		}
@@ -53,14 +53,14 @@ void User::returnBook(element b1) {
 void User::printList() {
 	cout << "\nuser " << this->name << " books:";
 	for ( int i = 0; i < this->book_list.size(); i++ )
-		this->book_list[i].book->printBook();
+		this->book_list[i]->book->printBook();
 }
 
 int User::get_id() {
 	return id;
 }
 
-List<element> User::get_book_list() {
+List<element *> User::get_book_list() {
 	return this->book_list;
 }
 

@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
-//#include "List.h"
-//#include "List.cpp"
+#include "List.h"
+#include "List.cpp"
 using namespace std;
 
 template <typename K, typename D>
@@ -37,6 +37,7 @@ public:
 	TreeNode<K, D> *insert(pair<K, D> data);
 	D &operator[](K key);
 	TreeNode<K, D> *find(K key);
+	void get_sorted_values(TreeNode<K, D> *node, List<pair<K, D>> &list);
 	//void remove(K key);
 
 
