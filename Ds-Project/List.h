@@ -118,6 +118,7 @@ public:
 	void add_before(T data);
 	void remove();
 	void set_data(T data);
+	T get_data();
 
 };
 

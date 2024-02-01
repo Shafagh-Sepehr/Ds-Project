@@ -56,6 +56,11 @@ void Node<T>::remove() {
 template<typename T>
 void Node<T>::set_data(T data) { this->data = data; }
 
+template<typename T>
+T Node<T>::get_data() {
+	return data;
+}
+
 
 
 template<typename T>
@@ -356,14 +361,16 @@ typename List<T>::Iterator List<T>::Iterator::operator--() {
 
 template<typename T>
 typename List<T>::Iterator List<T>::Iterator::operator++(int) {
+	List<T>::Iterator temp(*this);
 	ptr = ptr->next;
-	return *this;
+	return temp;
 }
 
 template<typename T>
 typename List<T>::Iterator List<T>::Iterator::operator--(int) {
+	List<T>::Iterator temp(*this);
 	ptr = ptr->prev;
-	return *this;
+	return temp;
 }
 
 template<typename T>

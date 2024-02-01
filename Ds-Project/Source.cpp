@@ -1,5 +1,5 @@
-//#include "User.h"
-//#include "Book.h"
+#include "User.h"
+#include "Book.h"
 #include "AvlTree.h"
 #include "AvlTree.cpp"
 using namespace std;
@@ -28,7 +28,7 @@ int main() {
 	b1.printBook();*/
 
 	//this checks rr,ll,rl,lr rebalance
-	AvlTree<int, string> tree;
+	/*AvlTree<int, string> tree;
 	tree.insert(make_pair(100, "book1"));
 	tree.insert(make_pair(200, "book1"));
 	tree.insert(make_pair(300, "book1"));
@@ -41,7 +41,14 @@ int main() {
 	tree.insert(make_pair(98, "book1"));
 	tree.insert(make_pair(275, "book1"));
 	tree.insert(make_pair(225, "book1"));
-	tree.insert(make_pair(280, "book1"));
+	tree.insert(make_pair(280, "book1"));*/
 
 
+	List<int> l;
+	l.push_back(5);
+	l.push_back(6);
+	l.push_back(5);
+	auto i = l.begin();
+	auto a = ++i;
+	cout << (*a)->get_data();
 }
