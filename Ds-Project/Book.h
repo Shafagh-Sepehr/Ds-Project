@@ -13,7 +13,7 @@ class Book {
 private:
 	string genre, name, print_date, writer;
 	int owner; 
-	Queue<int> user_reserved_id, day_reserved;
+	Queue<int> user_reserved_id;
 public:
 	Book(string genre, string name, string date, string writer);
 	int setBookOwner(int id);

@@ -11,7 +11,7 @@ using namespace std;
 
 
 int main() {
-	/*Book b1("a", "a", "a", "a");
+	Book b1("a", "a", "a", "a");
 	Book b2("b", "b", "b", "b");
 	Book b3("c", "c", "c", "c");
 	User u1("a", "a", "admin", "1234", 1);
@@ -25,26 +25,5 @@ int main() {
 	u3.printList();
 	u3.returnBook(&b1);
 	u3.printList();
-	b1.printBook();*/
-
-	//this checks rr,ll,rl,lr rebalance
-	AvlTree<int, string> tree;
-	tree.insert(make_pair(100, "book1"));
-	tree.insert(make_pair(200, "book1"));
-	tree.insert(make_pair(300, "book1"));
-	tree.insert(make_pair(50, "book1"));
-	tree.insert(make_pair(25, "bovok1"));
-	tree.insert(make_pair(250, "book1"));
-	tree.insert(make_pair(350, "book1"));
-	tree.insert(make_pair(101, "book2"));
-	tree.insert(make_pair(99, "book1"));
-	tree.insert(make_pair(98, "book1"));
-	tree.insert(make_pair(275, "book1"));
-	tree.insert(make_pair(225, "book245367"));
-	tree.insert(make_pair(280, "book1"));
-	//cout << tree.find(225)->get_data().second;
-	tree.erase();
-
-
-
+	b1.printBook();
 }

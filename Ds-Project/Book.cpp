@@ -6,10 +6,7 @@ Book::Book(string genre, string name, string date, string writer) {
 	this->print_date = date;
 	this->writer = writer;
 	this->owner = 0;
-	Queue<int> user(10);
-	Queue<int> day(10);
-	this->user_reserved_id = user;
-	this->day_reserved = day;
+	this->user_reserved_id = Queue<int>(10);
 }
 int Book::setBookOwner(int id) {
 	if (!this->owner) {
@@ -17,11 +14,6 @@ int Book::setBookOwner(int id) {
 		return 0;
 	}
 	this->user_reserved_id.queue(id);
-	auto currentTime = std::chrono::system_clock::now();
-	std::time_t currentTime_t = std::chrono::system_clock::to_time_t(currentTime);
-	std::tm* currentTime_tm = std::localtime(&currentTime_t);
-	int day = currentTime_tm->tm_mday;
-	this->day_reserved.queue(day);
 	return 1;
 }
 
