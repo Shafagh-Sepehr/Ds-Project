@@ -29,13 +29,13 @@ void User::addBook(Book *b1) {
 	this->book_list.push_back(tmp);
 }
 
-void User::returnBook(element *b1) {
-	for ( int i = 0; i < this->book_list.size(); i++ )
-		if ( this->book_list[i]->book == b1->book ) {
-			this->book_list.erase(i);
-			return;
-		}
-}
+//void User::returnBook(element b1) {
+//	for ( int i = 0; i < this->book_list.size(); i++ )
+//		if ( this->book_list[i].book == b1.book ) {
+//			this->book_list.erase(i);
+//			return;
+//		}
+//}
 
 //void User::setOwner(User *u1, Book *b1) {
 //	if ( this->admin ) {
@@ -62,6 +62,21 @@ int User::get_id() {
 
 List<element *> User::get_book_list() {
 	return this->book_list;
+}
+
+void User::extend(Book* book) {
+	for (int i = 0; i < this->book_list.size(); i++)
+		if (this->book_list[i].book == book) {
+			this->book_list[i].day += 3;
+			if (this->book_list[i].day > 30) {
+				this->book_list[i].day -= 30;
+				this->book_list[i].month++;
+				if (this->book_list[i].month > 12) {
+					this->book_list[i].month -= 12;
+					this->book_list[i].year++;
+				}
+			}
+		}
 }
 
 bool User::isAdmin() {

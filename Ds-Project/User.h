@@ -23,11 +23,12 @@ private:
 public:
 	User(string name, string lname, string username, string pass);
 	void addBook(Book *book);
-	void returnBook(element *b1);
-	void setOwner(User *u1, Book *b1);
+	/*void returnBook(element b1);*/
+	/*void setOwner(User *u1, Book *b1);*/
 	void printList();
 	int get_id();
 	List<element *> get_book_list();
+	void extend(Book *book);
 	bool isAdmin();
 	static List<User *> get_users_list();
 

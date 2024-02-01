@@ -35,14 +35,6 @@ bool Book::operator==(Book *b1) {
 		&& this->owner == b1->owner && this->writer == b1->writer;
 }
 
-void Book::returnBook() {
-	if ( this->user_reserved_id.isEmpty() )
-		this->owner = 0;
-	else {
-
-	}
-}
-
 bool Book::isThisMyTurn(int id) {
 	if (this->user_reserved_id.isEmpty()) {
 		this->last_date_borrowed.day = -1;
@@ -110,4 +102,8 @@ void Book::setOwner(int owner) {
 
 string Book::get_name() {
 	return name;
+}
+
+bool Book::isQueueEmpty() {
+	return this->user_reserved_id.isEmpty();
 }

@@ -26,6 +26,7 @@ public:
 	static void return_book(element book);
 	static void show_user_borrowed_books();
 	static void show_all_books();
+	static void extendBorrow(User* user, Book* book);
 
 
 
