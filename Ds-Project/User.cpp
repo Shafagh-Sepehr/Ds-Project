@@ -1,5 +1,8 @@
 #include "User.h"
 
+int User::code = 0;
+List<User *> User::users = List<User *>();
+
 User::User(string name, string lname, string username, string pass) {
 	this->id = ++this->code;
 	this->name = name;

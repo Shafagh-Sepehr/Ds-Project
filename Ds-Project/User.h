@@ -34,5 +34,3 @@ public:
 
 };
 
-int User::code = 0;
-List<User *> User::users = List<User *>();

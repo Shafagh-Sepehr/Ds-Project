@@ -34,4 +34,3 @@ public:
 
 };
 
-User *Controller::logged_in_user = nullptr;

@@ -1,5 +1,7 @@
 #include "Controller.h"
 
+User *Controller::logged_in_user = nullptr;
+
 void Controller::add_user(string name, string lname, string username, string pass) {
 
 	User *new_user = new User(name, lname, username, pass);
@@ -55,9 +57,9 @@ void Controller::borrow_book(Book *book, User *user) {
 }
 
 void Controller::return_book(element book) {
-	List<element> bookList = logged_in_user->get_book_list();
+	List<element *> bookList = logged_in_user->get_book_list();
 	for ( int i = 0; i < bookList.size(); i++ )
-		if ( bookList[i].book == book.book ) {
+		if ( bookList[i]->book == book.book ) {
 			book.book->setOwner(0);
 			auto currentTime = std::chrono::system_clock::now();
 			std::time_t currentTime_t = std::chrono::system_clock::to_time_t(currentTime);

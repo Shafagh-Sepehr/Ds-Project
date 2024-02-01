@@ -106,12 +106,12 @@ List<T>::~List() {
 }
 
 template<typename T>
-typename List<T>::Iterator List<T>::begin() {
+typename List<T>::Iterator List<T>::begin() const {
 	return List<T>::Iterator(this->head_tail->next);
 }
 
 template<typename T>
-typename List<T>::Iterator List<T>::end() {
+typename List<T>::Iterator List<T>::end() const {
 	return List<T>::Iterator(this->head_tail);
 }
 

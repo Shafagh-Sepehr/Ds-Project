@@ -168,9 +168,9 @@ void AvlTree<K, D>::get_sorted_values(TreeNode<K, D> *node, List<pair<K, D>> &li
 	if ( node == nullptr )
 		return;
 
-	get_sorted_values(node->left);
+	get_sorted_values(node->left, list);
 	list.push_back(node->get_data());
-	get_sorted_values(node->right);
+	get_sorted_values(node->right, list);
 }
 
 template<typename K, typename D>
