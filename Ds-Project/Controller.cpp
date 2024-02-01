@@ -34,18 +34,22 @@ Book *Controller::search_book(string name) {
 	return book;
 }
 
-void Controller::borrow_book(Book *book) {
+void Controller::borrow_book(Book *book, User* user) {
 
-	if (logged_in_user->isAdmin()) {
-		if (book->setBookOwner(logged_in_user->get_id())) {
-			cout << "\nthis book is reserved succesfully\n";
-			return;
+	if (logged_in_user->isAdmin() && book) {
+		if (book->isThisMyTurn(user->get_id())) {
+			if (book->setBookOwner(user->get_id())) {
+				cout << "\nthis book is reserved succesfully\n";
+				return;
+			}
+			logged_in_user->addBook(book);
+			cout << "\nsetting owner completed\n";
 		}
-		logged_in_user->addBook(book);
-		cout << "\nsetting owner completed\n";
+		else
+			cout << "\nit is not your turn!\n";
 	}
 	else
-		cout << "\nyou are not admin!\n";
+		cout << "\nyou are not admin or the book was not found!\n";
 
 
 }
@@ -54,6 +58,20 @@ void Controller::return_book(element book) {
 	List<element> bookList = logged_in_user->get_book_list();
 	for (int i = 0; i < bookList.size(); i++)
 		if (bookList[i].book == book.book) {
+			book.book->setOwner(0);
+			auto currentTime = std::chrono::system_clock::now();
+			std::time_t currentTime_t = std::chrono::system_clock::to_time_t(currentTime);
+			std::tm* currentTime_tm = std::localtime(&currentTime_t);
+			int day = currentTime_tm->tm_mday;
+			int month = currentTime_tm->tm_mon;
+			int year = currentTime_tm->tm_year;
+			int years_passed = year - book.year;
+			int monthes_passed = month - book.month;
+			int days_passed = day - book.day + 30 * monthes_passed + 360 * years_passed;
+			days_passed -= 10;
+			if (days_passed > 0)
+				cout << "\nyour fine is: " << days_passed * 5 << "t\n";
+			book.book->setDate(day, month, year);
 			bookList.erase(i);
 			return;
 		}

@@ -44,8 +44,10 @@ void Book::returnBook() {
 }
 
 bool Book::isThisMyTurn(int id) {
-	if ( this->user_reserved_id.isEmpty() )
+	if (this->user_reserved_id.isEmpty()) {
+		this->last_date_borrowed.day = -1;
 		return true;
+	}
 	auto currentTime = std::chrono::system_clock::now();
 	std::time_t currentTime_t = std::chrono::system_clock::to_time_t(currentTime);
 	std::tm *currentTime_tm = std::localtime(&currentTime_t);
@@ -57,25 +59,53 @@ bool Book::isThisMyTurn(int id) {
 	int days_passed;
 	if ( day != -1 )
 		days_passed = day - this->last_date_borrowed.day + 30 * monthes_passed + 360 * years_passed;
-	else
+	else {
+		this->last_date_borrowed.day = -1;
 		return true;
+	}
 
-	for ( int i = 0; i <= days_passed / 3; i++ )
+	for (int i = 0; i < days_passed / 3; i++)
 		this->user_reserved_id.Dequeue();
-
-	if ( this->user_reserved_id.isEmpty() )
-		return true;
-	else if ( this->user_reserved_id.last() == id ) {
-		this->user_reserved_id.Dequeue();
+	
+	if (this->user_reserved_id.isEmpty()) {
+		this->last_date_borrowed.day = -1;
 		return true;
 	}
 	else
-		return false;
-
+		if ( this->user_reserved_id.last() == id ) {
+			this->user_reserved_id.Dequeue();
+			this->last_date_borrowed.day = -1;
+			return true;
+		}
+		else {
+			days_passed %= 3;
+			this->last_date_borrowed.day = day - days_passed;
+			this->last_date_borrowed.month = month;
+			this->last_date_borrowed.year = year;
+			if (this->last_date_borrowed.day < 1) {
+				this->last_date_borrowed.month--;
+				this->last_date_borrowed.day += 30;
+				if (this->last_date_borrowed.month < 1) {
+					this->last_date_borrowed.month += 12;
+					this->last_date_borrowed.year--;
+				}
+			}
+			return false;
+		}
 }
 
 List<Book *> Book::get_books_list() {
 	return books;
+}
+
+void Book::setDate(int day, int month, int year) {
+	this->last_date_borrowed.day = day;
+	this->last_date_borrowed.month = month;
+	this->last_date_borrowed.year = year;
+}
+
+void Book::setOwner(int owner) {
+	this->owner = owner;
 }
 
 string Book::get_name() {

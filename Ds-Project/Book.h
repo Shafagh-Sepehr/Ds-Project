@@ -27,7 +27,8 @@ public:
 	void returnBook();
 	bool isThisMyTurn(int id);
 	static List<Book *> get_books_list();
-
+	void setDate(int day, int month, int year);
+	void setOwner(int owner);
 	string get_name();
 };
 
