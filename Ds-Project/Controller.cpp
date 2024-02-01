@@ -77,17 +77,35 @@ void Controller::return_book(element book) {
 		}
 }
 
-void Controller::show_user_borrowed_books() {
+List<pair<string, Book>> Controller::show_user_borrowed_books() {
 
 	List<element *> elem_list = logged_in_user->get_book_list();
+	AvlTree<string, Book> book_tree;
+	for ( auto i : elem_list ) {
+		book_tree.insert(make_pair(i->get_data()->book->get_name(), *(i->get_data()->book)));
+	}
+
+	List<pair<string, Book>> book_list;
+	book_tree.get_sorted_list(book_list);
+	return book_list;
+}
+
+List<pair<string, Book>> Controller::show_all_books() {
 
 
+	AvlTree<string, Book> book_tree;
+	for ( auto i : Book::get_books_list() ) {
+		book_tree.insert(make_pair(i->get_data()->get_name(), *(i->get_data())));
+	}
 
+	List<pair<string, Book>> book_list;
+	book_tree.get_sorted_list(book_list);
+	return book_list;
 
 }
 
-void Controller::extendBorrow(User* user, Book* book) {
-	if (book->isQueueEmpty()) {
+void Controller::extendBorrow(User *user, Book *book) {
+	if ( book->isQueueEmpty() ) {
 		user->extend(book);
 		cout << "\nextension completed\n";
 		return;

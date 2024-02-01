@@ -24,9 +24,9 @@ public:
 	static Book *search_book(string name);
 	static void borrow_book(Book *book, User *user);
 	static void return_book(element book);
-	static void show_user_borrowed_books();
-	static void show_all_books();
-	static void extendBorrow(User* user, Book* book);
+	static List<pair<string, Book>> show_user_borrowed_books();
+	static List<pair<string, Book>> show_all_books();
+	static void extendBorrow(User *user, Book *book);
 
 
 

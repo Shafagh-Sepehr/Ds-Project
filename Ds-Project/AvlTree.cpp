@@ -159,6 +159,11 @@ TreeNode<K, D> *AvlTree<K, D>::find(K key) {
 }
 
 template<typename K, typename D>
+void AvlTree<K, D>::get_sorted_list(List<pair<K, D>> &list) {
+	get_sorted_values(root, list);
+}
+
+template<typename K, typename D>
 void AvlTree<K, D>::get_sorted_values(TreeNode<K, D> *node, List<pair<K, D>> &list) {
 	if ( node == nullptr )
 		return;
