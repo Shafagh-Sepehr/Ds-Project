@@ -18,4 +18,5 @@ public:
 	void queue(T data);
 	int GetItemsInQueue();
 	int GetSize();
+	bool isEmpty();
 };
