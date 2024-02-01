@@ -6,7 +6,7 @@ User::User(string name, string lname, string username, string pass) {
 	this->last_name = lname;
 	this->username = username;
 	this->password = pass;
-	if (this->username == "admin" && this->password == "1234")
+	if ( this->username == "admin" && this->password == "1234" )
 		this->admin = true;
 	else
 		this->admin = false;
@@ -14,10 +14,10 @@ User::User(string name, string lname, string username, string pass) {
 	users.push_back(this);
 }
 
-void User::addBook(Book* b1) {
+void User::addBook(Book *b1) {
 	auto currentTime = std::chrono::system_clock::now();
 	std::time_t currentTime_t = std::chrono::system_clock::to_time_t(currentTime);
-	std::tm* currentTime_tm = std::localtime(&currentTime_t);
+	std::tm *currentTime_tm = std::localtime(&currentTime_t);
 	int day = currentTime_tm->tm_mday;
 	int month = currentTime_tm->tm_mon;
 	int year = currentTime_tm->tm_year;
@@ -30,8 +30,8 @@ void User::addBook(Book* b1) {
 }
 
 void User::returnBook(element b1) {
-	for (int i = 0; i < this->book_list.size(); i++)
-		if (this->book_list[i].book == b1.book) {
+	for ( int i = 0; i < this->book_list.size(); i++ )
+		if ( this->book_list[i].book == b1.book ) {
 			this->book_list.erase(i);
 			return;
 		}
@@ -52,6 +52,14 @@ void User::setOwner(User *u1, Book *b1) {
 
 void User::printList() {
 	cout << "\nuser " << this->name << " books:";
-	for (int i = 0; i < this->book_list.size(); i++)
+	for ( int i = 0; i < this->book_list.size(); i++ )
 		this->book_list[i].book->printBook();
+}
+
+int User::get_id() {
+	return id;
+}
+
+List<User *> User::get_users_list() {
+	return users;
 }

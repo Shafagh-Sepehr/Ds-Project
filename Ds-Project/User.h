@@ -6,7 +6,7 @@
 using namespace std;
 
 struct element {
-	Book* book;
+	Book *book;
 	int day;
 	int month;
 	int year;
@@ -22,10 +22,13 @@ private:
 	static List<User *> users;
 public:
 	User(string name, string lname, string username, string pass);
-	void addBook(Book* book);
+	void addBook(Book *book);
 	void returnBook(element b1);
-	void setOwner(User* u1,Book* b1);
+	void setOwner(User *u1, Book *b1);
 	void printList();
+	int get_id();
+	static List<User *> get_users_list();
+
 };
 
 int User::code = 0;

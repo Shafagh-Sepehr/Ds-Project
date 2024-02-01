@@ -1,8 +1,4 @@
-#ifndef BOOK_H
-#define BOOK_H
-
 #pragma once
-#pragma warning(disable : 4996)
 #include "Queue.h"
 #include "Queue.cpp"
 #include "List.h"
@@ -24,8 +20,10 @@ public:
 	void printBook();
 	bool operator==(Book *b1);
 	void returnBook();
+	static List<Book *> get_books_list();
+
+	string get_name();
 };
 
 List<Book *> Book::books = List<Book *>();
 
-#endif // !BOOK_H

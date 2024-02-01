@@ -33,9 +33,17 @@ bool Book::operator==(Book *b1) {
 }
 
 void Book::returnBook() {
-	if (this->user_reserved_id.isEmpty())
+	if ( this->user_reserved_id.isEmpty() )
 		this->owner = 0;
 	else {
 
 	}
+}
+
+List<Book *> Book::get_books_list() {
+	return books;
+}
+
+string Book::get_name() {
+	return name;
 }

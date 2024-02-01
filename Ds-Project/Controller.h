@@ -8,11 +8,11 @@
 #include "Queue.cpp"
 #include "Book.h"
 #include "User.h"
-
+using namespace std;
 
 class Controller {
 private:
-
+	static User *logged_in_user;
 
 
 
@@ -20,9 +20,9 @@ private:
 public:
 
 	static void add_user(string name, string lname, string username, string pass);
-	static void add_book();
-	static void search_book();
-	static void get_book();
+	static void add_book(string genre, string name, string date, string writer);
+	static Book *search_book(string name);
+	static void borrow_book(Book *book);
 	static void return_book();
 
 
@@ -32,3 +32,4 @@ public:
 
 };
 
+User *Controller::logged_in_user = nullptr;
