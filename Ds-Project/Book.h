@@ -21,7 +21,7 @@ private:
 
 	static List<Book *> books;
 public:
-	Book();
+	Book() = default;
 	Book(string genre, string name, string date, string writer);
 	int setBookOwner(int id);
 	void printBook();

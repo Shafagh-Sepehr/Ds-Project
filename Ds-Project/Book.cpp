@@ -2,8 +2,6 @@
 
 List<Book *> Book::books = List<Book *>();
 
-Book::Book() = default;
-
 Book::Book(string genre, string name, string date, string writer) {
 	this->genre = genre;
 	this->name = name;

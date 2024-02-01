@@ -23,15 +23,13 @@ public:
 	static void add_book(string genre, string name, string date, string writer);
 	static Book *search_book(string name);
 	static void borrow_book(Book *book, User *user);
-	static void return_book(element book);
+	static void return_book(Book* book, User* user);
 	static List<pair<string, Book>> show_user_borrowed_books();
 	static List<pair<string, Book>> show_all_books();
 	static void extendBorrow(User *user, Book *book);
-
-	static void extendBorrow(User* user, Book* book);
 	static bool isAdminControl();
 	static bool searchUser(string username, string pass);
-
+	static User* getUser(string username, string pass);
 
 
 

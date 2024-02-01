@@ -32,33 +32,6 @@ void User::addBook(Book *b1) {
 	this->book_list.push_back(tmp);
 }
 
-//void User::returnBook(element b1) {
-//	for ( int i = 0; i < this->book_list.size(); i++ )
-//		if ( this->book_list[i].book == b1.book ) {
-//			this->book_list.erase(i);
-//			return;
-//		}
-//}
-
-//void User::setOwner(User *u1, Book *b1) {
-//	if ( this->admin ) {
-//		if ( b1->setBookOwner(u1->code) ) {
-//			cout << "\nthis book is reserved succesfully\n";
-//			return;
-//		}
-//		u1->addBook(b1);
-//		cout << "\nsetting owner completed\n";
-//	}
-//	else
-//		cout << "\nyou are not admin\n";
-//}
-
-void User::printList() {
-	cout << "\nuser " << this->name << " books:";
-	for ( int i = 0; i < this->book_list.size(); i++ )
-		this->book_list[i]->book->printBook();
-}
-
 int User::get_id() {
 	return id;
 }
