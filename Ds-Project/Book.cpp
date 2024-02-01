@@ -1,5 +1,9 @@
 #include "Book.h"
 
+List<Book *> Book::books = List<Book *>();
+
+Book::Book() = default;
+
 Book::Book(string genre, string name, string date, string writer) {
 	this->genre = genre;
 	this->name = name;
@@ -36,7 +40,7 @@ bool Book::operator==(Book *b1) {
 }
 
 bool Book::isThisMyTurn(int id) {
-	if (this->user_reserved_id.isEmpty()) {
+	if ( this->user_reserved_id.isEmpty() ) {
 		this->last_date_borrowed.day = -1;
 		return true;
 	}
@@ -56,10 +60,10 @@ bool Book::isThisMyTurn(int id) {
 		return true;
 	}
 
-	for (int i = 0; i < days_passed / 3; i++)
+	for ( int i = 0; i < days_passed / 3; i++ )
 		this->user_reserved_id.Dequeue();
-	
-	if (this->user_reserved_id.isEmpty()) {
+
+	if ( this->user_reserved_id.isEmpty() ) {
 		this->last_date_borrowed.day = -1;
 		return true;
 	}
@@ -74,10 +78,10 @@ bool Book::isThisMyTurn(int id) {
 			this->last_date_borrowed.day = day - days_passed;
 			this->last_date_borrowed.month = month;
 			this->last_date_borrowed.year = year;
-			if (this->last_date_borrowed.day < 1) {
+			if ( this->last_date_borrowed.day < 1 ) {
 				this->last_date_borrowed.month--;
 				this->last_date_borrowed.day += 30;
-				if (this->last_date_borrowed.month < 1) {
+				if ( this->last_date_borrowed.month < 1 ) {
 					this->last_date_borrowed.month += 12;
 					this->last_date_borrowed.year--;
 				}

@@ -51,8 +51,8 @@ public:
 
 	~List();
 
-	List<T>::Iterator begin();
-	List<T>::Iterator end();
+	List<T>::Iterator begin() const;
+	List<T>::Iterator end() const;
 
 	T &operator[](int i);
 

@@ -159,6 +159,21 @@ TreeNode<K, D> *AvlTree<K, D>::find(K key) {
 }
 
 template<typename K, typename D>
+void AvlTree<K, D>::get_sorted_list(List<pair<K, D>> &list) {
+	get_sorted_values(root, list);
+}
+
+template<typename K, typename D>
+void AvlTree<K, D>::get_sorted_values(TreeNode<K, D> *node, List<pair<K, D>> &list) {
+	if ( node == nullptr )
+		return;
+
+	get_sorted_values(node->left, list);
+	list.push_back(node->get_data());
+	get_sorted_values(node->right, list);
+}
+
+template<typename K, typename D>
 void AvlTree<K, D>::check_balance(TreeNode<K, D> *node) {
 	while ( node != nullptr ) {
 		if ( !is_node_balanced(node) )

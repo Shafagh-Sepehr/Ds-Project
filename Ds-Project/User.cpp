@@ -1,5 +1,8 @@
 #include "User.h"
 
+int User::code = 0;
+List<User *> User::users = List<User *>();
+
 User::User(string name, string lname, string username, string pass) {
 	this->id = ++this->code;
 	this->name = name;
@@ -21,11 +24,11 @@ void User::addBook(Book *b1) {
 	int day = currentTime_tm->tm_mday;
 	int month = currentTime_tm->tm_mon;
 	int year = currentTime_tm->tm_year;
-	element tmp;
-	tmp.book = b1;
-	tmp.day = day;
-	tmp.month = month;
-	tmp.year = year;
+	element *tmp = new element;
+	tmp->book = b1;
+	tmp->day = day;
+	tmp->month = month;
+	tmp->year = year;
 	this->book_list.push_back(tmp);
 }
 
@@ -53,27 +56,27 @@ void User::addBook(Book *b1) {
 void User::printList() {
 	cout << "\nuser " << this->name << " books:";
 	for ( int i = 0; i < this->book_list.size(); i++ )
-		this->book_list[i].book->printBook();
+		this->book_list[i]->book->printBook();
 }
 
 int User::get_id() {
 	return id;
 }
 
-List<element> User::get_book_list() {
+List<element *> User::get_book_list() {
 	return this->book_list;
 }
 
-void User::extend(Book* book) {
-	for (int i = 0; i < this->book_list.size(); i++)
-		if (this->book_list[i].book == book) {
-			this->book_list[i].day += 3;
-			if (this->book_list[i].day > 30) {
-				this->book_list[i].day -= 30;
-				this->book_list[i].month++;
-				if (this->book_list[i].month > 12) {
-					this->book_list[i].month -= 12;
-					this->book_list[i].year++;
+void User::extend(Book *book) {
+	for ( int i = 0; i < this->book_list.size(); i++ )
+		if ( this->book_list[i]->book == book ) {
+			this->book_list[i]->day += 3;
+			if ( this->book_list[i]->day > 30 ) {
+				this->book_list[i]->day -= 30;
+				this->book_list[i]->month++;
+				if ( this->book_list[i]->month > 12 ) {
+					this->book_list[i]->month -= 12;
+					this->book_list[i]->year++;
 				}
 			}
 		}

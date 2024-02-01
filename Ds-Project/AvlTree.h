@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
-//#include "List.h"
-//#include "List.cpp"
+#include "List.h"
+#include "List.cpp"
 using namespace std;
 
 template <typename K, typename D>
@@ -26,6 +26,8 @@ private:
 	TreeNode<K, D> *rebalance_rl(TreeNode<K, D> *upper_node, TreeNode<K, D> *middle_node, TreeNode<K, D> *lower_node);
 	TreeNode<K, D> *rebalance_lr(TreeNode<K, D> *upper_node, TreeNode<K, D> *middle_node, TreeNode<K, D> *lower_node);
 
+	void get_sorted_values(TreeNode<K, D> *node, List<pair<K, D>> &list);
+
 	static void erase_tree(TreeNode<K, D> *node);
 public:
 	AvlTree();
@@ -37,6 +39,7 @@ public:
 	TreeNode<K, D> *insert(pair<K, D> data);
 	D &operator[](K key);
 	TreeNode<K, D> *find(K key);
+	void get_sorted_list(List<pair<K, D>> &list);
 	//void remove(K key);
 
 

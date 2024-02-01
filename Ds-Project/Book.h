@@ -21,6 +21,7 @@ private:
 
 	static List<Book *> books;
 public:
+	Book();
 	Book(string genre, string name, string date, string writer);
 	int setBookOwner(int id);
 	void printBook();
@@ -33,5 +34,5 @@ public:
 	bool isQueueEmpty();
 };
 
-List<Book *> Book::books = List<Book *>();
+
 
