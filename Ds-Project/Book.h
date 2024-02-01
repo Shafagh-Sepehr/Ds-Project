@@ -23,7 +23,7 @@ public:
 	int setBookOwner(int id);
 	void printBook();
 	bool operator==(Book *b1);
-	void unown();
+	void returnBook();
 };
 
 List<Book *> Book::books = List<Book *>();

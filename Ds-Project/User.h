@@ -9,21 +9,24 @@ struct element {
 	Book* book;
 	int day;
 	int month;
+	int year;
 };
 
 class User {
 private:
 	List<element> book_list;
 	string name, last_name, username, password;
-	int code;
+	int id;
+	static int code;
 	bool admin;
 	static List<User *> users;
 public:
-	User(string name, string lname, string username, string pass, int code);
+	User(string name, string lname, string username, string pass);
 	void addBook(Book* book);
 	void returnBook(element b1);
 	void setOwner(User* u1,Book* b1);
 	void printList();
 };
 
+int User::code = 0;
 List<User *> User::users = List<User *>();

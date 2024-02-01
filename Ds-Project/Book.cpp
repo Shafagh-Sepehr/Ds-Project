@@ -32,6 +32,10 @@ bool Book::operator==(Book *b1) {
 		&& this->owner == b1->owner && this->writer == b1->writer;
 }
 
-void Book::unown() {
+void Book::returnBook() {
+	if (this->user_reserved_id.isEmpty())
+		this->owner = 0;
+	else {
 
+	}
 }

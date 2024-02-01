@@ -47,3 +47,8 @@ template <typename T>
 int Queue<T>::GetSize() {
 	return this->size;
 }
+
+template<typename T>
+bool Queue<T>::isEmpty() {
+	return this->items_in_queue == 0;
+}
