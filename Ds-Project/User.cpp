@@ -86,3 +86,7 @@ bool User::isAdmin() {
 List<User *> User::get_users_list() {
 	return users;
 }
+
+bool User::checkLogin(string username, string pass) {
+	return this->username == username && this->password == pass;
+}

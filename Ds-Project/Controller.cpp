@@ -86,4 +86,17 @@ void Controller::extendBorrow(User* user, Book* book) {
 	cout << "\nextension failed\n";
 }
 
+bool Controller::isAdminControl() {
+	return logged_in_user->isAdmin();
+}
+
+bool Controller::searchUser(string username, string pass) {
+	for (int i = 0; i < logged_in_user->get_users_list().size(); i++)
+		if (logged_in_user->get_users_list()[i]->checkLogin(username, pass)) {
+			logged_in_user = logged_in_user->get_users_list()[i];
+			return true;
+		}
+	return false;
+}
+
 

@@ -21,6 +21,7 @@ private:
 	bool admin;
 	static List<User *> users;
 public:
+	User() = default;
 	User(string name, string lname, string username, string pass);
 	void addBook(Book *book);
 	/*void returnBook(element b1);*/
@@ -31,7 +32,7 @@ public:
 	void extend(Book* book);
 	bool isAdmin();
 	static List<User *> get_users_list();
-
+	bool checkLogin(string username, string pass);
 };
 
 int User::code = 0;
