@@ -10,6 +10,8 @@ User::User(string name, string lname, string username, string pass, int code) {
 		this->admin = true;
 	else
 		this->admin = false;
+
+	users.push_back(this);
 }
 
 void User::addBook(Book* b1) {
@@ -34,9 +36,9 @@ void User::addBook(Book* b1) {
 //		}
 //}
 
-void User::setOwner(User* u1,Book* b1) {
-	if (this->admin) {
-		if (b1->setBookOwner(u1->code)) {
+void User::setOwner(User *u1, Book *b1) {
+	if ( this->admin ) {
+		if ( b1->setBookOwner(u1->code) ) {
 			cout << "\nthis book is reserved succesfully\n";
 			return;
 		}
