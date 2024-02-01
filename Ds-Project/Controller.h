@@ -22,6 +22,7 @@ public:
 	static void add_user(string name, string lname, string username, string pass);
 	static void add_book(string genre, string name, string date, string writer);
 	static Book *search_book(string name);
+	static Book *search_user_borrowed_book(string name);
 	static void borrow_book(Book *book, User *user);
 	static void return_book(Book* book, User* user);
 	static List<pair<string, Book>> show_user_borrowed_books();
