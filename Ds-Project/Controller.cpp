@@ -21,29 +21,42 @@ Book *Controller::search_book(string name) {
 	}
 
 	auto book_tree_node = book_tree.find(name);
+	Book* book;
 
 	if ( book_tree_node == nullptr ) {
 		//book not found
-		Book *book = nullptr;
+		book = nullptr;
 	}
 	else {
 		//book is the desired item
-		Book *book = book_tree_node->get_data().second;
+		book = book_tree_node->get_data().second;
 	}
-
+	return book;
 }
 
 void Controller::borrow_book(Book *book) {
 
-	book->setBookOwner(logged_in_user->get_id());
-	//logged_in_user->addBook();???
+	if (logged_in_user->isAdmin()) {
+		if (book->setBookOwner(logged_in_user->get_id())) {
+			cout << "\nthis book is reserved succesfully\n";
+			return;
+		}
+		logged_in_user->addBook(book);
+		cout << "\nsetting owner completed\n";
+	}
+	else
+		cout << "\nyou are not admin!\n";
 
 
 }
 
-void Controller::return_book() {
-
-
+void Controller::return_book(element book) {
+	List<element> bookList = logged_in_user->get_book_list();
+	for (int i = 0; i < bookList.size(); i++)
+		if (bookList[i].book == book.book) {
+			bookList.erase(i);
+			return;
+		}
 }
 
 

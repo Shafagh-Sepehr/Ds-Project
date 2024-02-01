@@ -37,18 +37,18 @@ void User::returnBook(element b1) {
 		}
 }
 
-void User::setOwner(User *u1, Book *b1) {
-	if ( this->admin ) {
-		if ( b1->setBookOwner(u1->code) ) {
-			cout << "\nthis book is reserved succesfully\n";
-			return;
-		}
-		u1->addBook(b1);
-		cout << "\nsetting owner completed\n";
-	}
-	else
-		cout << "\nyou are not admin\n";
-}
+//void User::setOwner(User *u1, Book *b1) {
+//	if ( this->admin ) {
+//		if ( b1->setBookOwner(u1->code) ) {
+//			cout << "\nthis book is reserved succesfully\n";
+//			return;
+//		}
+//		u1->addBook(b1);
+//		cout << "\nsetting owner completed\n";
+//	}
+//	else
+//		cout << "\nyou are not admin\n";
+//}
 
 void User::printList() {
 	cout << "\nuser " << this->name << " books:";
@@ -58,6 +58,14 @@ void User::printList() {
 
 int User::get_id() {
 	return id;
+}
+
+List<element> User::get_book_list() {
+	return this->book_list;
+}
+
+bool User::isAdmin() {
+	return this->admin;
 }
 
 List<User *> User::get_users_list() {

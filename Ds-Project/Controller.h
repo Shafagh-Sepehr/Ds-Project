@@ -23,7 +23,7 @@ public:
 	static void add_book(string genre, string name, string date, string writer);
 	static Book *search_book(string name);
 	static void borrow_book(Book *book);
-	static void return_book();
+	static void return_book(element book);
 
 
 
