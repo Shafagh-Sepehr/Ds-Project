@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="AvlTree.cpp" />
     <ClCompile Include="Book.cpp" />
+    <ClCompile Include="Controller.cpp" />
     <ClCompile Include="List.cpp" />
     <ClCompile Include="Queue.cpp" />
     <ClCompile Include="Source.cpp" />
@@ -137,6 +138,7 @@
   <ItemGroup>
     <ClInclude Include="AvlTree.h" />
     <ClInclude Include="Book.h" />
+    <ClInclude Include="Controller.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="Queue.h" />
     <ClInclude Include="User.h" />

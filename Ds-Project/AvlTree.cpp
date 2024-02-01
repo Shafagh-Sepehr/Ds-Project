@@ -1,5 +1,5 @@
+#pragma once
 #include "AvlTree.h"
-
 
 
 template <typename K, typename D>
