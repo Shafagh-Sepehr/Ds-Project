@@ -24,12 +24,12 @@ public:
 	int setBookOwner(int id);
 	void printBook();
 	bool operator==(Book *b1);
-	void returnBook();
 	bool isThisMyTurn(int id);
 	static List<Book *> get_books_list();
 	void setDate(int day, int month, int year);
 	void setOwner(int owner);
 	string get_name();
+	bool isQueueEmpty();
 };
 
 List<Book *> Book::books = List<Book *>();

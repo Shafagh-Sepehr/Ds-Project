@@ -77,4 +77,13 @@ void Controller::return_book(element book) {
 		}
 }
 
+void Controller::extendBorrow(User* user, Book* book) {
+	if (book->isQueueEmpty()) {
+		user->extend(book);
+		cout << "\nextension completed\n";
+		return;
+	}
+	cout << "\nextension failed\n";
+}
+
 
