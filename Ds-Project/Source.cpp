@@ -4,7 +4,7 @@
 #include "AvlTree.cpp"
 using namespace std;
 // Add kardan queue va handle kardanesh
-
+#include <map>
 
 
 
@@ -28,27 +28,23 @@ int main() {
 	b1.printBook();*/
 
 	//this checks rr,ll,rl,lr rebalance
-	/*AvlTree<int, string> tree;
+	AvlTree<int, string> tree;
 	tree.insert(make_pair(100, "book1"));
 	tree.insert(make_pair(200, "book1"));
 	tree.insert(make_pair(300, "book1"));
 	tree.insert(make_pair(50, "book1"));
-	tree.insert(make_pair(25, "book1"));
+	tree.insert(make_pair(25, "bovok1"));
 	tree.insert(make_pair(250, "book1"));
 	tree.insert(make_pair(350, "book1"));
-	tree.insert(make_pair(101, "book1"));
+	tree.insert(make_pair(101, "book2"));
 	tree.insert(make_pair(99, "book1"));
 	tree.insert(make_pair(98, "book1"));
 	tree.insert(make_pair(275, "book1"));
-	tree.insert(make_pair(225, "book1"));
-	tree.insert(make_pair(280, "book1"));*/
+	tree.insert(make_pair(225, "book245367"));
+	tree.insert(make_pair(280, "book1"));
+	//cout << tree.find(225)->get_data().second;
+	tree.erase();
 
 
-	List<int> l;
-	l.push_back(5);
-	l.push_back(6);
-	l.push_back(5);
-	auto i = l.begin();
-	auto a = ++i;
-	cout << (*a)->get_data();
+
 }

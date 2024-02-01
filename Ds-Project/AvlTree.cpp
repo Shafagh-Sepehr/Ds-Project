@@ -1,5 +1,7 @@
 #include "AvlTree.h"
 
+
+
 template <typename K, typename D>
 TreeNode<K, D>::TreeNode():data(pair<K, D>()), parent(nullptr), left(nullptr), right(nullptr) {}
 
@@ -8,6 +10,9 @@ TreeNode<K, D>::TreeNode(pair<K, D> data) : data(data), parent(nullptr), left(nu
 
 template<typename K, typename D>
 TreeNode<K, D>::TreeNode(const TreeNode &that) : data(that.data), parent(that.parent), left(that.left), right(that.right) {}
+
+template<typename K, typename D>
+TreeNode<K, D>::~TreeNode() = default;
 
 template <typename K, typename D>
 bool TreeNode<K, D>::is_root() const {
@@ -60,6 +65,23 @@ TreeNode<K, D> *TreeNode<K, D>::extend(pair<K, D> data) {
 	}
 }
 
+template<typename K, typename D>
+TreeNode<K, D> *TreeNode<K, D>::search(TreeNode<K, D> *node, K key) {
+	if ( node == nullptr )
+		return nullptr;
+	else if ( node->data.first == key )
+		return node;
+	else if ( node->data.first < key )
+		return search(node->right, key);
+	else
+		return search(node->left, key);
+}
+
+template<typename K, typename D>
+pair<K, D> &TreeNode<K, D>::get_data() {
+	return data;
+}
+
 
 //template <typename K, typename D>
 //void TreeNode<K, D>::add_to_right(TreeNode *new_node) {
@@ -84,6 +106,17 @@ template<typename K, typename D>
 AvlTree<K, D>::AvlTree(): root(nullptr), _size(0) {}
 
 template<typename K, typename D>
+AvlTree<K, D>::~AvlTree() {
+	erase();
+}
+
+template<typename K, typename D>
+void AvlTree<K, D>::erase() {
+	erase_tree(root);
+	root = nullptr;
+}
+
+template<typename K, typename D>
 int AvlTree<K, D>::size() const {
 	return _size;
 }
@@ -94,15 +127,35 @@ bool AvlTree<K, D>::empty() const {
 }
 
 template<typename K, typename D>
-void AvlTree<K, D>::insert(pair<K, D> data) {
+TreeNode<K, D> *AvlTree<K, D>::insert(pair<K, D> data) {
 	this->_size++;
 	TreeNode<K, D> *new_node = nullptr;
-	if ( root == nullptr )
+	if ( root == nullptr ) {
 		root = new TreeNode<K, D>(data);
-	else
+		return root;
+	}
+	else {
 		new_node = root->extend(data);
+		check_balance(new_node);
+		return new_node;
+	}
 
-	check_balance(new_node);
+}
+
+template<typename K, typename D>
+D &AvlTree<K, D>::operator[](K key) {
+	TreeNode<K, D> *node = this->find(key);
+
+	if ( node == nullptr )
+		node = this->insert(make_pair(key, D()));
+
+	return node->get_data().second;
+
+}
+
+template<typename K, typename D>
+TreeNode<K, D> *AvlTree<K, D>::find(K key) {
+	return TreeNode<K, D>::search(root, key);
 }
 
 template<typename K, typename D>
@@ -268,6 +321,19 @@ TreeNode<K, D> *AvlTree<K, D>::rebalance_lr(TreeNode<K, D> *upper_node, TreeNode
 	upper_node->parent = lower_node;
 
 	return lower_node;
+}
+
+template<typename K, typename D>
+void AvlTree<K, D>::erase_tree(TreeNode<K, D> *node) {
+	if ( node != nullptr ) {
+		TreeNode<K, D> *left = node->left;
+		TreeNode<K, D> *right = node->right;
+
+		delete node;
+
+		erase_tree(left);
+		erase_tree(right);
+	}
 }
 
 

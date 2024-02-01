@@ -15,7 +15,7 @@ private:
 
 	int node_height(TreeNode<K, D> *node) const;
 
-	void check_balance( TreeNode<K, D> *node);
+	void check_balance(TreeNode<K, D> *node);
 	bool is_node_balanced(const TreeNode<K, D> *node) const;
 	TreeNode<K, D> *rebalance_node(TreeNode<K, D> *node);
 
@@ -26,13 +26,17 @@ private:
 	TreeNode<K, D> *rebalance_rl(TreeNode<K, D> *upper_node, TreeNode<K, D> *middle_node, TreeNode<K, D> *lower_node);
 	TreeNode<K, D> *rebalance_lr(TreeNode<K, D> *upper_node, TreeNode<K, D> *middle_node, TreeNode<K, D> *lower_node);
 
+	static void erase_tree(TreeNode<K, D> *node);
 public:
 	AvlTree();
+	~AvlTree();
 
 	int size() const;
 	bool empty() const;
-	void insert(pair<K, D> data);
-	//long find(K key);
+	void erase();
+	TreeNode<K, D> *insert(pair<K, D> data);
+	D &operator[](K key);
+	TreeNode<K, D> *find(K key);
 	//void remove(K key);
 
 
@@ -55,14 +59,19 @@ private:
 	TreeNode<K, D> *left;
 	TreeNode<K, D> *right;
 
+
 public:
 	TreeNode();
 	TreeNode(pair<K, D> data);
 	TreeNode(const TreeNode &that);
+	~TreeNode();
 	bool is_root() const;
 	bool is_external() const;
 	int height() const;
 	TreeNode<K, D> *extend(pair<K, D> data);
+	static TreeNode<K, D> *search(TreeNode<K, D> *node, K key);
+	pair<K, D> &get_data();
+
 	//void add_to_right(TreeNode *new_node);
 	//void add_to_left(TreeNode *new_node);
 
