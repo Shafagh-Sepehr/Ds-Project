@@ -36,6 +36,27 @@ Book *Controller::search_book(string name) {
 	return book;
 }
 
+Book *Controller::search_user_borrowed_book(string name) {
+	AvlTree<string, Book *> book_tree;
+
+	for ( auto book_node : logged_in_user->get_book_list() ) {
+		book_tree.insert(make_pair(book_node->get_data()->book->get_name(), book_node->get_data()->book));
+	}
+
+	auto book_tree_node = book_tree.find(name);
+	Book *book;
+
+	if ( book_tree_node == nullptr ) {
+		//book not found
+		book = nullptr;
+	}
+	else {
+		//book is the desired item
+		book = book_tree_node->get_data().second;
+	}
+	return book;
+}
+
 void Controller::borrow_book(Book *book, User *user) {
 
 	if ( logged_in_user->isAdmin() && book ) {
@@ -120,8 +141,8 @@ bool Controller::isAdminControl() {
 }
 
 bool Controller::searchUser(string username, string pass) {
-	for (int i = 0; i < logged_in_user->get_users_list().size(); i++)
-		if (logged_in_user->get_users_list()[i]->checkLogin(username, pass)) {
+	for ( int i = 0; i < logged_in_user->get_users_list().size(); i++ )
+		if ( logged_in_user->get_users_list()[i]->checkLogin(username, pass) ) {
 			logged_in_user = logged_in_user->get_users_list()[i];
 			return true;
 		}
