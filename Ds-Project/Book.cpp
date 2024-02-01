@@ -44,30 +44,34 @@ void Book::returnBook() {
 }
 
 bool Book::isThisMyTurn(int id) {
-	if (this->user_reserved_id.isEmpty())
+	if ( this->user_reserved_id.isEmpty() )
 		return true;
 	auto currentTime = std::chrono::system_clock::now();
 	std::time_t currentTime_t = std::chrono::system_clock::to_time_t(currentTime);
-	std::tm* currentTime_tm = std::localtime(&currentTime_t);
+	std::tm *currentTime_tm = std::localtime(&currentTime_t);
 	int day = currentTime_tm->tm_mday;
 	int month = currentTime_tm->tm_mon;
 	int year = currentTime_tm->tm_year;
 	int years_passed = year - this->last_date_borrowed.year;
 	int monthes_passed = month - this->last_date_borrowed.month;
-	int days_passed = day - this->last_date_borrowed.day + 30 * monthes_passed + 360 * years_passed;
-	int user_id;
-	for (int i = 0; i <= days_passed / 3; i++) {
-		if (this->user_reserved_id.isEmpty())
-			return true;
-		if (this->user_reserved_id.last() == id) {
-			this->user_reserved_id.Dequeue();
-			return true;
-		}
-	}
-	if (user_id == id)
+	int days_passed;
+	if ( day != -1 )
+		days_passed = day - this->last_date_borrowed.day + 30 * monthes_passed + 360 * years_passed;
+	else
 		return true;
+
+	for ( int i = 0; i <= days_passed / 3; i++ )
+		this->user_reserved_id.Dequeue();
+
+	if ( this->user_reserved_id.isEmpty() )
+		return true;
+	else if ( this->user_reserved_id.last() == id ) {
+		this->user_reserved_id.Dequeue();
+		return true;
+	}
 	else
 		return false;
+
 }
 
 List<Book *> Book::get_books_list() {
