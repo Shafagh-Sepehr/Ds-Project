@@ -84,7 +84,10 @@ List<T>::List(int size, T value):_size(size) {
 }
 
 template<typename T>
-List<T>::List(const List<T> &that) {
+List<T>::List(const List<T> &that):_size(0) {
+	head_tail = new Node<T>();
+	head_tail->prev = head_tail;
+	head_tail->next = head_tail;
 	for ( Node<T> *node : that ) {
 		this->push_back(node->data);
 	}
@@ -92,7 +95,15 @@ List<T>::List(const List<T> &that) {
 
 template<typename T>
 List<T> List<T>::operator=(const List<T> &that) {
-	return List<T>();
+	this->clear();
+	_size = 0;
+	head_tail = new Node<T>();
+	head_tail->prev = head_tail;
+	head_tail->next = head_tail;
+	for ( Node<T> *node : that ) {
+		this->push_back(node->data);
+	}
+	return *this;
 }
 
 template<typename T>
@@ -313,6 +324,11 @@ T &List<T>::front() {
 template<typename T>
 T &List<T>::back() {
 	return head_tail->prev->data;
+}
+
+template<typename T>
+int List<T>::size() {
+	return _size;
 }
 
 template<typename T>

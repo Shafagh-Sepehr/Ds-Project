@@ -88,7 +88,7 @@ public:
 	T &front();
 	T &back();
 
-	int size() { return _size; }
+	int size();
 
 	void print();
 

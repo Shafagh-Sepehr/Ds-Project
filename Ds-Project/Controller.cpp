@@ -1,5 +1,5 @@
 #include "Controller.h"
-
+#include <conio.h>
 User *Controller::logged_in_user = nullptr;
 
 void Controller::add_user(string name, string lname, string username, string pass) {
@@ -18,7 +18,7 @@ Book *Controller::search_book(string name) {
 
 	AvlTree<string, Book *> book_tree;
 
-	if (Book::get_books_list().empty())
+	if ( Book::get_books_list().empty() )
 		return nullptr;
 
 	for ( auto book_node : Book::get_books_list() ) {
@@ -42,7 +42,7 @@ Book *Controller::search_book(string name) {
 Book *Controller::search_user_borrowed_book(string name) {
 	AvlTree<string, Book *> book_tree;
 
-	if (logged_in_user->get_book_list().empty())
+	if ( logged_in_user->get_book_list().empty() )
 		return nullptr;
 
 	for ( auto book_node : logged_in_user->get_book_list() ) {
@@ -64,9 +64,9 @@ Book *Controller::search_user_borrowed_book(string name) {
 }
 
 
-User* Controller::getUser(string username, string pass) {
-	for (int i = 0; i < logged_in_user->get_users_list().size(); i++)
-		if (logged_in_user->get_users_list()[i]->checkLogin(username, pass))
+User *Controller::getUser(string username, string pass) {
+	for ( int i = 0; i < logged_in_user->get_users_list().size(); i++ )
+		if ( logged_in_user->get_users_list()[i]->checkLogin(username, pass) )
 			return logged_in_user->get_users_list()[i];
 	return nullptr;
 }
@@ -76,11 +76,11 @@ void Controller::borrow_book(Book *book, User *user) {
 	if ( logged_in_user->isAdmin() && book ) {
 		if ( book->isThisMyTurn(user->get_id()) ) {
 			if ( book->setBookOwner(user->get_id()) ) {
+				logged_in_user->addBook(book);
 				cout << "\nthis book is reserved succesfully\npress any key to continue...\n";
-				cin >> tmp;
+				_getch();
 				return;
 			}
-			logged_in_user->addBook(book);
 			cout << "\nsetting owner completed\n";
 		}
 		else
@@ -88,18 +88,17 @@ void Controller::borrow_book(Book *book, User *user) {
 	}
 	else
 		cout << "\nyou are not admin or the book was not found!\n";
-	cout << "press any key to continue...\n";
-	cin >> tmp;
+
 
 
 }
 
-void Controller::return_book(Book* book, User* user) {
+void Controller::return_book(Book *book, User *user) {
 	string tmp;
 	List<element *> bookList = user->get_book_list();
 	for ( int i = 0; i < bookList.size(); i++ )
 		if ( bookList[i]->book == book ) {
-			element* elem = bookList[i];
+			element *elem = bookList[i];
 			elem->book->setOwner(0);
 			auto currentTime = std::chrono::system_clock::now();
 			std::time_t currentTime_t = std::chrono::system_clock::to_time_t(currentTime);
@@ -111,7 +110,7 @@ void Controller::return_book(Book* book, User* user) {
 			int monthes_passed = month - elem->month;
 			int days_passed = day - elem->day + 30 * monthes_passed + 360 * years_passed;
 			days_passed -= 10;
-			if (days_passed > 0) {
+			if ( days_passed > 0 ) {
 				cout << "\nyour fine is: " << days_passed * 5 << "t\npress any key to continue...\n";
 				cin >> tmp;
 			}
@@ -166,9 +165,14 @@ bool Controller::isAdminControl() {
 
 
 bool Controller::searchUser(string username, string pass) {
-	for ( int i = 0; i < logged_in_user->get_users_list().size(); i++ )
-		if ( logged_in_user->get_users_list()[i]->checkLogin(username, pass) ) {
+	/*for ( int i = 0; i < User::get_users_list().size(); i++ )
+		if ( User::get_users_list()[i]->checkLogin(username, pass) ) {
 			logged_in_user = logged_in_user->get_users_list()[i];
+			return true;
+		}*/
+	for ( auto i : User::get_users_list() )
+		if ( i->get_data()->checkLogin(username, pass) ) {
+			logged_in_user = i->get_data();
 			return true;
 		}
 	return false;
