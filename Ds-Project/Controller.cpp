@@ -147,15 +147,14 @@ List<pair<string, Book>> Controller::show_all_books() {
 }
 
 void Controller::extendBorrow(User *user, Book *book) {
-	string tmp;
 	if ( book->isQueueEmpty() ) {
 		user->extend(book);
 		cout << "\nextension completed\npress any key to continue...\n";
-		cin >> tmp;
+		_getch();
 		return;
 	}
 	cout << "\nextension failed\npress any key to continue...\n";
-	cin >> tmp;
+	_getch();
 }
 
 bool Controller::isAdminControl() {
@@ -165,11 +164,6 @@ bool Controller::isAdminControl() {
 
 
 bool Controller::searchUser(string username, string pass) {
-	/*for ( int i = 0; i < User::get_users_list().size(); i++ )
-		if ( User::get_users_list()[i]->checkLogin(username, pass) ) {
-			logged_in_user = logged_in_user->get_users_list()[i];
-			return true;
-		}*/
 	for ( auto i : User::get_users_list() )
 		if ( i->get_data()->checkLogin(username, pass) ) {
 			logged_in_user = i->get_data();
