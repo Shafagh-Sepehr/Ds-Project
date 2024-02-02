@@ -3,6 +3,10 @@
 using namespace std;
 
 int main() {
+	string book_name, genre, date, writer;
+	Book* book = new Book;
+	User* user = new User;
+	List<pair<string, Book>> list;
 	string name, pass, lname, username;
 	int command;
 
@@ -38,10 +42,6 @@ int main() {
 				return 0;
 		}
 		while ( 1 ) {
-			string book_name, genre, date, writer;
-			Book *book;
-			User *user;
-			List<pair<string, Book>> list;
 
 			system("CLS");
 			cout << "1. add book (admin)\n2. show my books\n3. search my books\n4. show all books\n"
@@ -70,7 +70,7 @@ int main() {
 						for ( int i = 0; i < list.size(); i++ )
 							list[i].second.printBook();
 						cout << "press any key to continue...\n";
-						cin >> command;
+						_getch();
 					}
 					break;
 				case 3:
@@ -83,7 +83,7 @@ int main() {
 					else {
 						cout << "book was not found!\n";
 					}
-					cout << "press any keu to continue...";
+					cout << "press any keu to continue...\n";
 					_getch();
 					break;
 				case 4:
@@ -201,6 +201,8 @@ int main() {
 					break;
 				case 9:
 					logout = true;
+					break;
+				default:
 					break;
 			}
 			if ( logout ) {

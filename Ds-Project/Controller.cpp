@@ -42,10 +42,10 @@ Book *Controller::search_book(string name) {
 Book *Controller::search_user_borrowed_book(string name) {
 	AvlTree<string, Book *> book_tree;
 
-	if ( logged_in_user->get_book_list().empty() )
+	if ( (*logged_in_user->get_book_list()).empty())
 		return nullptr;
 
-	for ( auto book_node : logged_in_user->get_book_list() ) {
+	for ( auto book_node : *logged_in_user->get_book_list() ) {
 		book_tree.insert(make_pair(book_node->get_data()->book->get_name(), book_node->get_data()->book));
 	}
 
@@ -72,15 +72,15 @@ User *Controller::getUser(string username, string pass) {
 }
 
 void Controller::borrow_book(Book *book, User *user) {
-	string tmp;
+
 	if ( logged_in_user->isAdmin() && book ) {
 		if ( book->isThisMyTurn(user->get_id()) ) {
 			if ( book->setBookOwner(user->get_id()) ) {
-				logged_in_user->addBook(book);
 				cout << "\nthis book is reserved succesfully\npress any key to continue...\n";
 				_getch();
 				return;
 			}
+			user->addBook(book);
 			cout << "\nsetting owner completed\n";
 		}
 		else
@@ -88,17 +88,17 @@ void Controller::borrow_book(Book *book, User *user) {
 	}
 	else
 		cout << "\nyou are not admin or the book was not found!\n";
-
+	_getch();
 
 
 }
 
 void Controller::return_book(Book *book, User *user) {
 	string tmp;
-	List<element *> bookList = user->get_book_list();
-	for ( int i = 0; i < bookList.size(); i++ )
-		if ( bookList[i]->book == book ) {
-			element *elem = bookList[i];
+	List<element *>* bookList = user->get_book_list();
+	for ( int i = 0; i < bookList->size(); i++ )
+		if ( (*bookList)[i]->book == book) {
+			element *elem = (*bookList)[i];
 			elem->book->setOwner(0);
 			auto currentTime = std::chrono::system_clock::now();
 			std::time_t currentTime_t = std::chrono::system_clock::to_time_t(currentTime);
@@ -115,16 +115,16 @@ void Controller::return_book(Book *book, User *user) {
 				cin >> tmp;
 			}
 			elem->book->setDate(day, month, year);
-			bookList.erase(i);
+			bookList->erase(i);
 			return;
 		}
 }
 
 List<pair<string, Book>> Controller::show_user_borrowed_books() {
 
-	List<element *> elem_list = logged_in_user->get_book_list();
+	List<element *>* elem_list = logged_in_user->get_book_list();
 	AvlTree<string, Book> book_tree;
-	for ( auto i : elem_list ) {
+	for ( auto i : *elem_list ) {
 		book_tree.insert(make_pair(i->get_data()->book->get_name(), *(i->get_data()->book)));
 	}
 

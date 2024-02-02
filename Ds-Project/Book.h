@@ -17,10 +17,10 @@ private:
 	string genre, name, print_date, writer;
 	int owner;
 	date last_date_borrowed;
-	Queue<int> user_reserved_id;
 
 	static List<Book *> books;
 public:
+	Queue<int> user_reserved_id;
 	Book() = default;
 	Book(string genre, string name, string date, string writer);
 	int setBookOwner(int id);

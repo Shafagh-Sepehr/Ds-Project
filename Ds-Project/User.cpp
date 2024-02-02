@@ -36,8 +36,8 @@ int User::get_id() {
 	return id;
 }
 
-List<element *> User::get_book_list() {
-	return this->book_list;
+List<element *>* User::get_book_list() {
+	return &this->book_list;
 }
 
 void User::extend(Book *book) {

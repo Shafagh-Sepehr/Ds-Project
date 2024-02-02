@@ -16,6 +16,7 @@ Book::Book(string genre, string name, string date, string writer) {
 }
 int Book::setBookOwner(int id) {
 	if ( !this->owner ) {
+		this->last_date_borrowed.day = -1;
 		this->owner = id;
 		return 0;
 	}
@@ -29,7 +30,7 @@ void Book::printBook() {
 		<< endl << "book genre: " << this->genre
 		<< endl << "book writer: " << this->writer
 		<< endl << "owner: " << ((this->owner) ? this->owner : -1)
-		<< "\n-----------------------------";
+		<< "\n-----------------------------\n";
 }
 
 bool Book::operator==(Book *b1) {
@@ -38,7 +39,7 @@ bool Book::operator==(Book *b1) {
 }
 
 bool Book::isThisMyTurn(int id) {
-	if ( this->user_reserved_id.isEmpty() ) {
+	if ( this->user_reserved_id.isEmpty() || this->last_date_borrowed.day == -1 ) {
 		this->last_date_borrowed.day = -1;
 		return true;
 	}
@@ -50,14 +51,7 @@ bool Book::isThisMyTurn(int id) {
 	int year = currentTime_tm->tm_year;
 	int years_passed = year - this->last_date_borrowed.year;
 	int monthes_passed = month - this->last_date_borrowed.month;
-	int days_passed;
-	if ( day != -1 )
-		days_passed = day - this->last_date_borrowed.day + 30 * monthes_passed + 360 * years_passed;
-	else {
-		this->last_date_borrowed.day = -1;
-		return true;
-	}
-
+	int days_passed = day - this->last_date_borrowed.day + 30 * monthes_passed + 360 * years_passed;;
 	for ( int i = 0; i < days_passed / 3; i++ )
 		this->user_reserved_id.Dequeue();
 
