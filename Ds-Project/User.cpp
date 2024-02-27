@@ -36,7 +36,7 @@ int User::get_id() {
 	return id;
 }
 
-List<element *>* User::get_book_list() {
+List<element *> *User::get_book_list() {
 	return &this->book_list;
 }
 
@@ -65,4 +65,8 @@ List<User *> User::get_users_list() {
 
 bool User::checkLogin(string username, string pass) {
 	return this->username == username && this->password == pass;
+}
+
+string User::get_username() {
+	return username;
 }

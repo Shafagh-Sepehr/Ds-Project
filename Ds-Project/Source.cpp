@@ -4,8 +4,8 @@ using namespace std;
 
 int main() {
 	string book_name, genre, date, writer;
-	Book* book = new Book;
-	User* user = new User;
+	Book *book = new Book;
+	User *user = new User;
 	List<pair<string, Book>> list;
 	string name, pass, lname, username;
 	int command;
@@ -26,7 +26,10 @@ int main() {
 				cin >> username;
 				cout << "enter your password: ";
 				cin >> pass;
-				Controller::add_user(name, lname, username, pass);
+				if ( Controller::add_user(name, lname, username, pass) )
+					break;
+				else
+					continue;
 				break;
 			case 2:
 				cout << "enter your username: ";
@@ -69,9 +72,9 @@ int main() {
 					if ( !list.empty() ) {
 						for ( int i = 0; i < list.size(); i++ )
 							list[i].second.printBook();
-						cout << "press any key to continue...\n";
-						_getch();
 					}
+					cout << "press any key to continue...\n";
+					_getch();
 					break;
 				case 3:
 					cout << "enter the book name you want to search: ";

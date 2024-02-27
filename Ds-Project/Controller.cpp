@@ -2,11 +2,20 @@
 #include <conio.h>
 User *Controller::logged_in_user = nullptr;
 
-void Controller::add_user(string name, string lname, string username, string pass) {
-
+bool Controller::add_user(string name, string lname, string username, string pass) {
+	for ( auto i : User::get_users_list() ) {
+		if ( name == i->get_data()->get_username() ) {
+			system("cls");
+			cout << "username is taken, pick another one\npress any key to continue...\n";
+			_getch();
+			system("cls");
+			return false;
+		}
+	}
 	User *new_user = new User(name, lname, username, pass);
 
 	logged_in_user = new_user;
+	return true;
 }
 
 void Controller::add_book(string genre, string name, string date, string writer) {
@@ -42,7 +51,7 @@ Book *Controller::search_book(string name) {
 Book *Controller::search_user_borrowed_book(string name) {
 	AvlTree<string, Book *> book_tree;
 
-	if ( (*logged_in_user->get_book_list()).empty())
+	if ( (*logged_in_user->get_book_list()).empty() )
 		return nullptr;
 
 	for ( auto book_node : *logged_in_user->get_book_list() ) {
@@ -95,9 +104,9 @@ void Controller::borrow_book(Book *book, User *user) {
 
 void Controller::return_book(Book *book, User *user) {
 	string tmp;
-	List<element *>* bookList = user->get_book_list();
+	List<element *> *bookList = user->get_book_list();
 	for ( int i = 0; i < bookList->size(); i++ )
-		if ( (*bookList)[i]->book == book) {
+		if ( (*bookList)[i]->book == book ) {
 			element *elem = (*bookList)[i];
 			elem->book->setOwner(0);
 			auto currentTime = std::chrono::system_clock::now();
@@ -112,17 +121,19 @@ void Controller::return_book(Book *book, User *user) {
 			days_passed -= 10;
 			if ( days_passed > 0 ) {
 				cout << "\nyour fine is: " << days_passed * 5 << "t\npress any key to continue...\n";
-				cin >> tmp;
+				_getch();
 			}
 			elem->book->setDate(day, month, year);
 			bookList->erase(i);
+			cout << "book returned\n";
+			_getch();
 			return;
 		}
 }
 
 List<pair<string, Book>> Controller::show_user_borrowed_books() {
 
-	List<element *>* elem_list = logged_in_user->get_book_list();
+	List<element *> *elem_list = logged_in_user->get_book_list();
 	AvlTree<string, Book> book_tree;
 	for ( auto i : *elem_list ) {
 		book_tree.insert(make_pair(i->get_data()->book->get_name(), *(i->get_data()->book)));
